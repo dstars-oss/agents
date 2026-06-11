@@ -29,7 +29,11 @@ For simple, clear, low-risk changes, you may proceed directly.
 
 ## Goals and Verification
 
-After completing changes, use an independent sub-agent to review the changes. Only fix issues that are clearly valid and have medium or higher severity; do not make extra changes for low-severity issues, subjective style preferences, or unrelated suggestions, and mention them in the final response only when necessary.
+After completing non-trivial code, config, dependency, schema, migration, or test changes and running the most relevant initial verification, explicitly ask an independent read-only reviewer sub-agent, or `/review` when available, to review only the task-specific diff before the final response. Skip this for trivial documentation/text-only changes, very small low-risk edits, or when sub-agents are unavailable; in those cases perform a focused self-review instead and mention it only when it affects confidence.
+
+The reviewer must not edit files. Ask it to prioritize correctness, behavior regressions, security/privacy/data-loss risks, public API or data-format compatibility, and missing or weak tests. Require findings to include severity, file/line references, rationale, and reproduction or verification steps when possible. "No findings" is an acceptable result.
+
+Only fix reviewer findings that are clearly valid and medium severity or higher. Do not make extra changes for low-severity issues, subjective style preferences, or unrelated suggestions. After fixing any accepted finding, rerun the relevant narrow verification and include unresolved material findings, assumptions, or skipped verification in the final response.
 
 When verifying, run the most relevant and narrowly scoped checks that demonstrate the issue.
 Prefer the project's existing tests, linting, formatting, type checks, and build commands.
