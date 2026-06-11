@@ -33,7 +33,7 @@ After completing non-trivial code, config, dependency, schema, migration, or tes
 
 The reviewer must not edit files. Ask it to prioritize correctness, behavior regressions, security/privacy/data-loss risks, public API or data-format compatibility, and missing or weak tests. Require findings to include severity, file/line references, rationale, and reproduction or verification steps when possible. "No findings" is an acceptable result.
 
-Only fix reviewer findings that are clearly valid and medium severity or higher. Do not make extra changes for low-severity issues, subjective style preferences, or unrelated suggestions. After fixing any accepted finding, rerun the relevant narrow verification and include unresolved material findings, assumptions, or skipped verification in the final response.
+Only fix reviewer findings that are clearly valid and have material impact. Do not make extra changes for subjective style preferences, low-value suggestions, or unrelated suggestions. After fixing any accepted finding, rerun the relevant narrow verification and include unresolved material findings, assumptions, or skipped verification in the final response.
 
 When verifying, run the most relevant and narrowly scoped checks that demonstrate the issue.
 Prefer the project's existing tests, linting, formatting, type checks, and build commands.
