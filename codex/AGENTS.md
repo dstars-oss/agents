@@ -29,11 +29,11 @@ For simple, clear, low-risk changes, you may proceed directly.
 
 ## Goals and Verification
 
-After completing non-trivial code, config, dependency, schema, migration, or test changes and running the most relevant initial verification, explicitly ask an independent read-only reviewer sub-agent, or `/review` when available, to review only the task-specific diff before the final response. Skip this for trivial documentation/text-only changes, very small low-risk edits, or when sub-agents are unavailable; in those cases perform a focused self-review instead and mention it only when it affects confidence.
+After completing non-trivial code, config, dependency, schema, migration, or test changes and running the most relevant initial verification, explicitly ask the `verifier` sub-agent to review and verify only the task-specific diff before the final response. If `verifier` is unavailable, use `/review` when available. Skip this for trivial documentation/text-only changes, very small low-risk edits, or when `verifier` and `/review` are unavailable; in those cases perform a focused self-review instead and mention it only when it affects confidence.
 
-The reviewer must not edit files. Ask it to prioritize correctness, behavior regressions, security/privacy/data-loss risks, public API or data-format compatibility, and missing or weak tests. Require findings to include severity, file/line references, rationale, and reproduction or verification steps when possible. "No findings" is an acceptable result.
+Ask `verifier` to use the task context to prioritize concrete correctness issues, behavior regressions, compatibility problems, safety risks, and missing or weak verification. Require findings to include severity, file/line references, rationale, and reproduction or verification steps when possible. "No findings" is an acceptable result.
 
-Only fix reviewer findings that are clearly valid and have material impact. Do not make extra changes for subjective style preferences, low-value suggestions, or unrelated suggestions. After fixing any accepted finding, rerun the relevant narrow verification and include unresolved material findings, assumptions, or skipped verification in the final response.
+Only fix verifier findings that are clearly valid and have material impact. Do not make extra changes for subjective style preferences, low-value suggestions, or unrelated suggestions. After fixing any accepted finding, rerun the relevant narrow verification and include unresolved material findings, assumptions, or skipped verification in the final response.
 
 When verifying, run the most relevant and narrowly scoped checks that demonstrate the issue.
 Prefer the project's existing tests, linting, formatting, type checks, and build commands.
