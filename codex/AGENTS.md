@@ -16,9 +16,7 @@ Prioritize:
 1. Correctness
 2. Maintainability
 3. Clarity
-4. The smallest necessary change
 
-By default, make the smallest correct change that satisfies the request.
 Unless the task explicitly requires it, do not change existing behavior, public APIs, data formats, compatibility, project structure, or external interfaces.
 
 For non-trivial tasks, read the relevant files, tests, error messages, and project documentation before making changes.
@@ -29,9 +27,9 @@ For simple, clear, low-risk changes, you may proceed directly.
 
 ## Goals and Verification
 
-After completing non-trivial code, config, dependency, schema, migration, or test changes and running the most relevant initial verification, ask the `reviewer` sub-agent to review only the task-specific diff and verification results before the final response. Use a concise, self-contained prompt and do not inherit full conversation history unless the user explicitly asks for it. If `reviewer` is unavailable, use `/review` when available; otherwise perform a focused self-review for non-trivial changes.
+After completing non-trivial code, config, dependency, schema, migration, or test changes and running the most relevant initial verification, ask an independent generic sub-agent or review capability to review only the task-specific diff and verification results before the final response. Use a concise, self-contained prompt and do not inherit full conversation history unless the user explicitly asks for it.
 
-Ask `reviewer` to prioritize concrete correctness issues, behavior regressions, compatibility or safety risks, and missing verification. Fix only findings that are clearly valid and material, rerun the narrow relevant verification after any fix, and mention unresolved material findings, assumptions, or skipped verification in the final response.
+Ask the independent review capability to prioritize concrete correctness issues, behavior regressions, compatibility or safety risks, and missing verification. Fix only findings that are clearly valid and material, rerun the narrow relevant verification after any fix, and mention unresolved material findings, assumptions, or skipped verification in the final response.
 
 When verifying, run the most relevant and narrowly scoped checks that demonstrate the issue.
 Prefer the project's existing tests, linting, formatting, type checks, and build commands.

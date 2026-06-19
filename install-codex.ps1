@@ -58,19 +58,4 @@ foreach ($file in $RootFiles) {
     }
 }
 
-$SourceAgents = Join-Path $SourceRoot "agents"
-$TargetAgents = Join-Path $CodexHome "agents"
-if (Test-Path -LiteralPath $SourceAgents -PathType Container) {
-    $ResolvedTargetAgents = [System.IO.Path]::GetFullPath($TargetAgents)
-    if ((Test-IsSameOrChildPath $ResolvedTargetAgents $ResolvedScriptRoot) -or
-        (Test-IsSameOrChildPath $ResolvedScriptRoot $ResolvedTargetAgents)) {
-        throw "Target agents directory must not overlap this repository: $ResolvedTargetAgents"
-    }
-
-    New-Item -ItemType Directory -Force -Path $TargetAgents | Out-Null
-    Get-ChildItem -LiteralPath $SourceAgents -Force | ForEach-Object {
-        Copy-Item -LiteralPath $_.FullName -Destination $TargetAgents -Recurse -Force
-    }
-}
-
 Write-Host "Installed Codex configuration from $SourceRoot to $CodexHome"
